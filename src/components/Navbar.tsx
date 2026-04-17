@@ -33,13 +33,21 @@ export default function Navbar() {
         </div>
         
         <div className="flex gap-8 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--theme-color)' }}>
-          <button 
-            onClick={() => setIsAboutOpen(true)}
-            className="hover:opacity-50 transition-all duration-500 hover:scale-105"
-            data-cursor="Info"
-          >
-            About Me
-          </button>
+          <AnimatePresence>
+            {!isContentFocused && (
+              <motion.button 
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 10 }}
+                transition={{ duration: 0.8, ease: "easeInOut" }}
+                onClick={() => setIsAboutOpen(true)}
+                className="hover:opacity-50 transition-all duration-500 hover:scale-105"
+                data-cursor="Info"
+              >
+                About Me
+              </motion.button>
+            )}
+          </AnimatePresence>
         </div>
       </motion.nav>
 

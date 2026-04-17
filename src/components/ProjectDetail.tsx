@@ -1,7 +1,7 @@
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect, useState } from 'react';
-import { Folder, ChevronLeft, Play, LayoutGrid } from 'lucide-react';
+import { Folder, ChevronLeft, Play, LayoutGrid, X } from 'lucide-react';
 import { useTheme } from '../App';
 
 const PROJECT_DATA: Record<string, any> = {
@@ -11,8 +11,38 @@ const PROJECT_DATA: Record<string, any> = {
     color: 'var(--tag-photo)',
     colorRgb: '240, 243, 162',
     description: 'Capturing moments through a lens of experimental lighting and composition.',
-    image: 'https://picsum.photos/seed/photo/1200/800',
-    gallery: [1, 2, 3]
+    items: [
+      { 
+        label: 'Street Photography', 
+        type: 'folder',
+        description: 'Candid moments and urban narratives captured in the rhythm of the city.',
+        content: [
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/a9a270c14669483643ee1bcb54b8c869e532b4c6/IMG_3774.jpg', },
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/fb8b2dff946245394133fbb94d86054f6cfeefca/IMG_3778.jpg', },
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/fb8b2dff946245394133fbb94d86054f6cfeefca/IMG_3809.jpg', },
+        ]
+      },
+      { 
+        label: 'Nature Photography', 
+        type: 'folder',
+        description: 'Organic textures and transient light found in the natural world.',
+        content: [
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/440786698ebd1d33467cf1f77f9f4a904833fc58/IMG_9468.JPG',  },
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/440786698ebd1d33467cf1f77f9f4a904833fc58/DSC_0089.jpg'  },
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/440786698ebd1d33467cf1f77f9f4a904833fc58/IMG_3535.jpg', },
+        ]
+      },
+      { 
+        label: 'Model Photography', 
+        type: 'folder',
+        description: 'Portraiture studies focusing on form, emotion, and controlled lighting.',
+        content: [
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/0bfcf20fb49203d3c79ca56726a76df11cc3ac33/artificial%20light%201.jpeg', },
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/0bfcf20fb49203d3c79ca56726a76df11cc3ac33/artificial%20light%202.jpeg', },
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/0bfcf20fb49203d3c79ca56726a76df11cc3ac33/artificial%20light%203.jpeg'  },
+        ]
+      },
+    ]
   },
   'ai-projects': {
     title: 'AI Projects',
@@ -27,8 +57,6 @@ const PROJECT_DATA: Record<string, any> = {
         description: 'A cinematic journey through latent space, directed by neural networks.',
         content: [
           { type: 'image', url: 'https://picsum.photos/seed/film1/1200/800', caption: 'Atmospheric Scene' },
-          { type: 'image', url: 'https://picsum.photos/seed/film2/1200/800', caption: 'Neural Landscapes' },
-          { type: 'image', url: 'https://picsum.photos/seed/film3/1200/800', caption: 'Character Study' },
         ]
       },
       { 
@@ -36,9 +64,11 @@ const PROJECT_DATA: Record<string, any> = {
         type: 'folder',
         description: 'AI-assisted brand identity and visual storytelling for a futuristic concept.',
         content: [
-          { type: 'image', url: 'https://picsum.photos/seed/brand1/1200/800', caption: 'Primary Identity' },
-          { type: 'image', url: 'https://picsum.photos/seed/brand2/1200/800', caption: 'Digital Touchpoints' },
-          { type: 'image', url: 'https://picsum.photos/seed/brand3/1200/800', caption: 'Out-of-Home Simulation' },
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/0b58132479be1a3979d95cc2d01d5ebcddf5dcde/1.png', },
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/0b58132479be1a3979d95cc2d01d5ebcddf5dcde/2.png', },
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/0b58132479be1a3979d95cc2d01d5ebcddf5dcde/3.png', },
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/0b58132479be1a3979d95cc2d01d5ebcddf5dcde/4.png', },
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/0b58132479be1a3979d95cc2d01d5ebcddf5dcde/5.png', },
         ]
       },
     ]
@@ -49,8 +79,18 @@ const PROJECT_DATA: Record<string, any> = {
     color: 'var(--tag-design)',
     colorRgb: '255, 70, 162',
     description: 'Crafting unique visual identities and communication systems for modern brands.',
-    image: 'https://picsum.photos/seed/graphic-design/1200/800',
-    gallery: [1, 2, 3]
+    items: [
+      {
+        label: 'Social Media & Print',
+        type: 'folder',
+        description: 'Selected visual communication and marketing materials.',
+        content: [
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/bc3394ad59a1e30d929841d09e69d9fc2ec4a34c/Ai%20in%20Social%20Media%20Content_NEP_b%26w.jpg', caption: 'Poster' },
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/bc3394ad59a1e30d929841d09e69d9fc2ec4a34c/beach%20flyer.jpg', caption: 'Flyer' },
+          { type: 'image', url: 'https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/bc3394ad59a1e30d929841d09e69d9fc2ec4a34c/invitation%20card.jpg', caption: 'Invitation Card' },
+        ]
+      }
+    ]
   },
 };
 
@@ -60,6 +100,7 @@ export default function ProjectDetail() {
   const location = useLocation();
   const project = slug ? PROJECT_DATA[slug] : null;
   const [selectedFolder, setSelectedFolder] = useState<any | null>(null);
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const { setIsContentFocused } = useTheme();
 
   useEffect(() => {
@@ -67,19 +108,13 @@ export default function ProjectDetail() {
   }, [selectedFolder]);
 
   useEffect(() => {
-    // We are focused if we have a slug (on a project page)
-    // and specifically when viewing a folder's content
-    if (slug) {
-      setIsContentFocused(true);
-    }
+    // We are focused as soon as a project (tag) is opened
+    setIsContentFocused(true);
     
     return () => {
-      // Only unset if we are actually navigating away from the project scope
-      if (!window.location.pathname.includes('/project/')) {
-        setIsContentFocused(false);
-      }
+      setIsContentFocused(false);
     };
-  }, [slug, setIsContentFocused, location.pathname]);
+  }, [setIsContentFocused]);
 
   if (!project) return <div className="h-screen flex items-center justify-center">Project not found</div>;
 
@@ -258,7 +293,11 @@ export default function ProjectDetail() {
                     transition={{ delay: i * 0.1 }}
                     className="group flex flex-col gap-6"
                   >
-                    <div className="aspect-video bg-zinc-900/40 rounded-2xl overflow-hidden relative border border-white/5 shadow-2xl">
+                    <div 
+                      className="aspect-video bg-zinc-900/40 rounded-2xl overflow-hidden relative border border-white/5 shadow-2xl cursor-pointer"
+                      onClick={() => !selectedFolder.label.includes('Film') && setLightboxImage(item.url)}
+                      data-cursor={!selectedFolder.label.includes('Film') ? "View" : undefined}
+                    >
                       <img 
                         src={item.url} 
                         alt={item.caption} 
@@ -272,12 +311,14 @@ export default function ProjectDetail() {
                         <span className="font-mono text-[10px] uppercase opacity-40">Asset 0{i + 1}</span>
                         <h4 className="font-serif text-2xl tracking-tighter">{item.caption}</h4>
                       </div>
-                      <div 
-                        className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center transition-all group-hover:scale-110"
-                        style={{ backgroundColor: 'transparent', borderColor: 'var(--theme-color)', color: 'var(--theme-color)' }}
-                      >
-                        <Play size={16} fill="currentColor" stroke="none" />
-                      </div>
+                      {selectedFolder.label.includes('Film') && (
+                        <div 
+                          className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center transition-all group-hover:scale-110"
+                          style={{ backgroundColor: 'transparent', borderColor: 'var(--theme-color)', color: 'var(--theme-color)' }}
+                        >
+                          <Play size={16} fill="currentColor" stroke="none" />
+                        </div>
+                      )}
                     </div>
                   </motion.div>
                 ))}
@@ -286,6 +327,42 @@ export default function ProjectDetail() {
           )}
         </AnimatePresence>
       </div>
+
+      <AnimatePresence>
+        {lightboxImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setLightboxImage(null)}
+            className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-12 cursor-zoom-out"
+          >
+            <motion.button
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors z-[210]"
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxImage(null);
+              }}
+            >
+              <X size={32} />
+            </motion.button>
+            
+            <motion.img
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              src={lightboxImage}
+              alt="Fullscreen view"
+              referrerPolicy="no-referrer"
+              className="max-w-full max-h-full object-contain shadow-2xl rounded-sm"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

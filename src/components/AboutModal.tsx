@@ -42,7 +42,13 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
             </button>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-              <div className="flex flex-col gap-8">
+              <motion.div 
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
+                className="flex flex-col gap-8"
+              >
                 <span className="font-mono text-xs uppercase tracking-[0.3em] opacity-50">About Me</span>
                 <h2 className="font-serif text-5xl md:text-7xl tracking-tighter leading-none italic">
                   Shivani Shah
@@ -53,19 +59,31 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
                 <p className="font-sans text-lg leading-relaxed opacity-60">
                   I believe that the most powerful experiences are born where technology meets human intuition. My work spans from experimental photography to neural-network-driven cinematic experiments.
                 </p>
-              </div>
+              </motion.div>
 
               <div className="flex flex-col gap-12">
-                <div className="aspect-[4/5] w-full bg-zinc-800 rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
+                <motion.div 
+                  initial={{ scale: 0.9, opacity: 0, clipPath: 'inset(10% 10% 10% 10%)' }}
+                  whileInView={{ scale: 1, opacity: 1, clipPath: 'inset(0% 0% 0% 0%)' }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 1.2, ease: [0.215, 0.61, 0.355, 1] }}
+                  className="aspect-[4/5] w-full bg-zinc-800 rounded-2xl overflow-hidden border border-white/5 shadow-2xl"
+                >
                   <img 
                     src="https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/209d3f059f4bfa971ae5238e7229da7ca702db3e/IMG_0167.JPG" 
                     alt="Shivani Shah" 
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover grayscale opacity-60 hover:opacity-100 transition-all duration-1000"
                   />
-                </div>
+                </motion.div>
 
-                <div className="flex flex-col gap-8">
+                <motion.div 
+                  initial={{ y: 20, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.8, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
+                  className="flex flex-col gap-8"
+                >
                   <div className="flex flex-col gap-4">
                     <span className="font-mono text-[10px] uppercase tracking-widest opacity-40">Contact / Collaboration</span>
                     <div className="flex flex-col gap-4 font-serif text-2xl md:text-3xl tracking-tight">
@@ -84,7 +102,7 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
                     <span className="font-mono text-[10px] uppercase tracking-widest opacity-40">Location</span>
                     <span className="font-serif text-2xl tracking-tight italic">India</span>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
 
