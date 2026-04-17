@@ -58,7 +58,7 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
               <div className="flex flex-col gap-12">
                 <div className="aspect-[4/5] w-full bg-zinc-800 rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
                   <img 
-                    src="https://picsum.photos/seed/shivani-portrait/800/1000" 
+                    src="https://raw.githubusercontent.com/shivanishah07/Shivani-Shah--Portfolio/209d3f059f4bfa971ae5238e7229da7ca702db3e/IMG_0167.JPG" 
                     alt="Shivani Shah" 
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover grayscale opacity-60 hover:opacity-100 transition-all duration-1000"
