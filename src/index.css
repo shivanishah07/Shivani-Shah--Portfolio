@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=VT323&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-pixel: "VT323", monospace;
+  
+  --theme-color: #ffffff;
+  --theme-color-rgb: 255, 255, 255;
+
+  --color-bg-dark: #000000;
+  --color-bg-light: #000000;
+  --color-accent: #ffe430; /* A vibrant yellow like the reference */
+  
+  --color-tag-photo: #f0f3a2;
+  --color-tag-photo-rgb: 240, 243, 162;
+  --color-tag-ai: #2323FF;
+  --color-tag-ai-rgb: 35, 35, 255;
+  --color-tag-design: #FF46A2;
+  --color-tag-design-rgb: 255, 70, 162;
+
+  --color-atmosphere-1: rgba(255, 228, 48, 0.03); /* Extremely subtle accent glow */
+  --color-atmosphere-2: rgba(255, 255, 255, 0.015); /* Extremely subtle white glow */
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white antialiased selection:bg-[var(--theme-color)] selection:text-black;
+    cursor: none; /* Hide default cursor for custom cursor */
+  }
+
+  /* Smooth scroll support */
+  html.lenis {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
+  /* Improved Grain texture */
+  .grain {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 9999; /* Top of everything */
+    animation: grainShunt 8s steps(10) infinite;
+    mix-blend-mode: overlay;
+  }
+
+  @keyframes grainShunt {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -10%); }
+    20% { transform: translate(-15%, 5%); }
+    30% { transform: translate(7%, -25%); }
+    40% { transform: translate(-5%, 25%); }
+    50% { transform: translate(-15%, 10%); }
+    60% { transform: translate(15%, 0%); }
+    70% { transform: translate(0%, 15%); }
+    80% { transform: translate(3%, 35%); }
+    90% { transform: translate(-10%, 10%); }
+  }
+}
+
+@layer utilities {
+  /* Atmosphere spot spotlight effects */
+  .atmosphere-spot {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+    transition: transform 0.1s linear;
+  }
+}
+
